@@ -117,13 +117,14 @@ router.post('/users', function(req, res, next){
   })
 });
 
+/*
 router.get('/users/logout', function(req, res, next){
   console.log(req.user);
   console.log(req.session);
   req.logout();
   console.log(req.user);
   res.status(200).json({});
-});
+});*/
 
 function generateJWT() {
   var today = new Date();
