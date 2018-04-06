@@ -90,7 +90,7 @@ router.post('/users/login', function(req, res, next){
     if(err){ return next(err); }
 
     if(user){
-      user.token = generateJWT();
+      user.token = generateJWT(user.email);
       console.log("JWT token : > " + user.token);
 
       return res.json({user: user});
@@ -126,15 +126,12 @@ router.get('/users/logout', function(req, res, next){
   res.status(200).json({});
 });*/
 
-function generateJWT() {
-  var today = new Date();
-  var exp = new Date(today);
-  exp.setDate(today.getDate() + 60);
-
+function generateJWT(email) {
   return jwt.sign({
     id: this._id,
     username: this.username,
-    exp: parseInt(exp.getTime() / 1000),
+    data: {email: 'email'},
+    exp: Math.floor(Date.now() / 1000) + (60 * 60),
   }, secret);
 };
 
