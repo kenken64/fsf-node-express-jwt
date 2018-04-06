@@ -1,3 +1,4 @@
+require('dotenv').config();
 var http = require('http'),
     path = require('path'),
     methods = require('methods'),
@@ -7,7 +8,7 @@ var http = require('http'),
     cors = require('cors'),
     passport = require('passport'),
     errorhandler = require('errorhandler');
-    
+ 
 var isProduction = process.env.NODE_ENV === 'production';
 
 // Create global app object
@@ -21,16 +22,12 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 app.use(require('method-override')());
-app.use(express.static(__dirname + '/public'));
+//app.use(express.static(__dirname + '/public'));
 
-app.use(session({ secret: 'conduit', cookie: { maxAge: 60000 }, resave: false, saveUninitialized: false  }));
+app.use(session({ secret: 'ahdgsadhg', cookie: { maxAge: 60000 }, resave: false, saveUninitialized: false  }));
 
 if (!isProduction) {
   app.use(errorhandler());
-}
-
-if(isProduction){
-} else {
 }
 
 require('./config/passport');

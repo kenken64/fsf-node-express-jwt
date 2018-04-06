@@ -4,12 +4,57 @@ var passport = require('passport');
 var auth = require('../auth');
 var jwt = require('jsonwebtoken');
 var secret = require('../../config').secret;
+const mysql = require("mysql");
+const crypto = require('crypto');
+const q = require("q");
 
-router.get('/user', auth.required, function(req, res, next){
-  return res.json({});
+var makeQuery = function (sql, pool) {
+  console.log(sql);
+  return function (args) {
+      var defer = q.defer();
+      pool.getConnection(function (err, conn) {
+          if (err) {
+              defer.reject(err);
+              return;
+          }
+          conn.query(sql, args || [], function (err, results) {
+              conn.release();
+              if (err) {
+                  defer.reject(err);
+                  return;
+              }
+              defer.resolve(results);
+          });
+      });
+      return defer.promise;
+  }
+};
+
+var pool = mysql.createPool({
+  host: process.env.MYSQL_SERVER,
+  port: process.env.MYSQL_PORT,
+  user: process.env.MYSQL_USERNAME,
+  password: process.env.MYSQL_PASSWORD,
+  database: process.env.MYSQL_DATABASE,
+  connectionLimit: process.env.MYSQL_CONNECTION
 });
 
-router.put('/user', auth.required, function(req, res, next){
+const saveOneUserSql = "INSERT INTO users (username, email, bio, hash, salt, imageurl) VALUES (? ,? ,? ,?,?,?)";
+const getAllUsersSql = "SELECT username, email, bio, hash, salt, imageurl FROM users";
+
+var saveOneUser = makeQuery(saveOneUserSql, pool);
+var getAllUsers = makeQuery(getAllUsersSql, pool);
+
+router.get('/users', auth.required, function(req, res, next){
+  getAllUsers([]).then(result=>{
+    res.status(200).json(result);
+  }).catch(error=> {
+    console.log(error);
+    res.status(500).json(error);
+  })
+});
+
+router.put('/users', auth.required, function(req, res, next){
   
     // only update fields that were actually passed...
     if(typeof req.body.user.username !== 'undefined'){
@@ -39,12 +84,15 @@ router.post('/users/login', function(req, res, next){
   if(!req.body.user.password){
     return res.status(422).json({errors: {password: "can't be blank"}});
   }
+  //let user = req.body.user;
 
   passport.authenticate('local', {session: false}, function(err, user, info){
     if(err){ return next(err); }
 
     if(user){
       user.token = generateJWT();
+      console.log("JWT token : > " + user.token);
+
       return res.json({user: user});
     } else {
       return res.status(422).json(info);
@@ -56,9 +104,25 @@ router.post('/users', function(req, res, next){
   
   var username = req.body.user.username;
   var email = req.body.user.email;
+  var password = req.body.user.password;
+  let saltValue = crypto.randomBytes(16).toString('hex');
+  console.log("saltValue > " + saltValue);
   //user.setPassword(req.body.user.password);
+  let hashPassword = crypto.pbkdf2Sync(password, saltValue, 10000, 512, 'sha512').toString('hex');
+  saveOneUser([username, email, null, hashPassword, saltValue, null ]).then(result=>{
+    res.status(200).json(result);
+  }).catch(error=> {
+    console.log(error);
+    res.status(500).json(error);
+  })
+});
 
-  return res.json({});
+router.get('/users/logout', function(req, res, next){
+  console.log(req.user);
+  console.log(req.session);
+  req.logout();
+  console.log(req.user);
+  res.status(200).json({});
 });
 
 function generateJWT() {

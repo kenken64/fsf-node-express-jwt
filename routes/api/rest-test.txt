@@ -1,0 +1,63 @@
+POST http://localhost:3000/api/users HTTP/1.1
+content-type: application/json
+
+{
+    "user": {
+        "username": "kenken64",
+        "email": "bunnyppl@gmail.com",
+        "password": "pasword@123"
+    }
+}
+
+###
+
+POST http://localhost:3000/api/users HTTP/1.1
+content-type: application/json
+
+{
+    "user": {
+        "username": "kenken64",
+        "email": "bunnyppl@yahoo.com",
+        "password": "pasword@123"
+    }
+}
+
+###
+
+GET http://localhost:3000/api/users HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE1MjgxODE5MTYsImlhdCI6MTUyMjk5NzkxNn0.fhvQm3IjizZ5QV_I-hi_ec-ywjlSIX3ctLcGdb_lu_U
+
+###
+
+POST http://localhost:3000/api/users/login HTTP/1.1
+content-type: application/json
+
+{
+    "user": {
+        "email": "bunnyppl@yahoo.com",
+        "password": "pasword@123"
+    }
+}
+
+###
+
+POST http://localhost:3000/api/users/login HTTP/1.1
+content-type: application/json
+
+{
+    "user": {
+        "email": "bunnyppl@gmail.com",
+        "password": "pasword@123"
+    }
+}
+
+###
+GET http://localhost:3000/api/users/logout HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE1MjgxODE5MTYsImlhdCI6MTUyMjk5NzkxNn0.fhvQm3IjizZ5QV_I-hi_ec-ywjlSIX3ctLcGdb_lu_U
+
+###
+
+GET http://localhost:3000/api/users HTTP/1.1
+Authorization: Bearer fdsfhdsfgdsgfdsf.eyJleHAiOjE1MjgxODE5MTYsImlhdCI6MTUyMjk5NzkxNn0.fhvQm3IjizZ5QV_I-hi_ec-ywjlSIX3ctLcGdb_lu_U
+
+###

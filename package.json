@@ -1,7 +1,7 @@
 {
-  "name": "node express jwt",
+  "name": "fsfjwt",
   "version": "1.0.0",
-  "description": "node express jwt",
+  "description": "fsfjwt",
   "main": "app.js",
   "scripts": {
     "start": "node ./app.js",
@@ -13,6 +13,7 @@
   "dependencies": {
     "body-parser": "1.15.0",
     "cors": "2.7.1",
+    "dotenv": "^5.0.1",
     "errorhandler": "1.4.3",
     "express": "4.13.4",
     "express-jwt": "3.3.0",
@@ -21,8 +22,10 @@
     "method-override": "2.3.5",
     "methods": "1.1.2",
     "morgan": "1.7.0",
+    "mysql": "^2.15.0",
     "passport": "0.3.2",
     "passport-local": "1.0.0",
+    "q": "^1.5.1",
     "request": "2.69.0",
     "slug": "0.9.1",
     "underscore": "1.8.3"
