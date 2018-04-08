@@ -24,8 +24,23 @@ content-type: application/json
 
 ###
 
+PUT http://localhost:3000/api/users HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7ImVtYWlsIjoiZW1haWwifSwiZXhwIjoxNTIzMTc5MTY4LCJpYXQiOjE1MjMxNzU1Njh9.v2is5v26WYC2dLkMyPlD_AQbaXK2N9nRCOINvBH8AME
+content-type: application/json
+
+{
+    "user": {
+        "bio": "I am the person that created and design bitcoin",
+        "imageurl": "https://d1q6f0aelx0por.cloudfront.net/product-logos/81630ec2-d253-4eb2-b36c-eb54072cb8d6-golang.png",
+        "email": "bunnyppl@gmail.com"
+    }
+}
+
+
+###
+
 GET http://localhost:3000/api/users HTTP/1.1
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE1MjgxODE5MTYsImlhdCI6MTUyMjk5NzkxNn0.fhvQm3IjizZ5QV_I-hi_ec-ywjlSIX3ctLcGdb_lu_U
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7ImVtYWlsIjoiZW1haWwifSwiZXhwIjoxNTIzMTc5MTY4LCJpYXQiOjE1MjMxNzU1Njh9.v2is5v26WYC2dLkMyPlD_AQbaXK2N9nRCOINvBH8AME
 
 ###
 

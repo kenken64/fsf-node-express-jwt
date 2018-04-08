@@ -1,42 +1,8 @@
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
-const mysql = require("mysql");
-const q = require("q");
+
 const crypto = require('crypto');
-
-var makeQuery = function (sql, pool) {
-  console.log(sql);
-  return function (args) {
-      var defer = q.defer();
-      pool.getConnection(function (err, conn) {
-          if (err) {
-              defer.reject(err);
-              return;
-          }
-          conn.query(sql, args || [], function (err, results) {
-              conn.release();
-              if (err) {
-                  defer.reject(err);
-                  return;
-              }
-              defer.resolve(results);
-          });
-      });
-      return defer.promise;
-  }
-};
-
-var pool = mysql.createPool({
-  host: process.env.MYSQL_SERVER,
-  port: process.env.MYSQL_PORT,
-  user: process.env.MYSQL_USERNAME,
-  password: process.env.MYSQL_PASSWORD,
-  database: process.env.MYSQL_DATABASE,
-  connectionLimit: process.env.MYSQL_CONNECTION
-});
-
-const getOneUserByEmailSql = "SELECT username, email, bio, hash, salt, imageurl FROM users where email=?";
-var getOneUserByEmail = makeQuery(getOneUserByEmailSql, pool);
+const DbConnection = require('../db');
 
 passport.use(new LocalStrategy({
   usernameField: 'user[email]',
@@ -45,7 +11,7 @@ passport.use(new LocalStrategy({
   console.log(">>> email " + email);
   console.log(">>> password " + password);
   
-  getOneUserByEmail([email]).then(user=>{
+  DbConnection.instance.getOneUserByEmail([email]).then(user=>{
     let userFromDB =user[0];
     console.log(userFromDB);
     console.log(userFromDB.salt);
