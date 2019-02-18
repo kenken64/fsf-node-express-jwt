@@ -11,27 +11,27 @@
   },
   "license": "ISC",
   "dependencies": {
-    "body-parser": "1.15.0",
+    "body-parser": "^1.18.3",
     "cors": "2.7.1",
     "dotenv": "^5.0.1",
     "errorhandler": "1.4.3",
-    "express": "4.13.4",
-    "express-jwt": "3.3.0",
-    "express-session": "1.13.0",
-    "jsonwebtoken": "7.1.9",
-    "method-override": "2.3.5",
+    "express": "^4.16.4",
+    "express-jwt": "^5.3.1",
+    "express-session": "^1.15.6",
+    "jsonwebtoken": "^8.4.0",
+    "method-override": "^3.0.0",
     "methods": "1.1.2",
-    "morgan": "1.7.0",
-    "mysql": "^2.15.0",
+    "morgan": "^1.9.1",
+    "mysql": "^2.16.0",
     "passport": "0.3.2",
     "passport-local": "1.0.0",
     "q": "^1.5.1",
-    "request": "2.69.0",
-    "slug": "0.9.1",
+    "request": "^2.88.0",
+    "slug": "^0.9.3",
     "underscore": "1.8.3"
   },
   "devDependencies": {
-    "newman": "^3.8.2",
-    "nodemon": "^1.11.0"
+    "newman": "^4.3.1",
+    "nodemon": "^1.18.10"
   }
 }

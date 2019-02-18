@@ -67,10 +67,6 @@ content-type: application/json
 }
 
 ###
-GET http://localhost:3000/api/users/logout HTTP/1.1
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE1MjgxODE5MTYsImlhdCI6MTUyMjk5NzkxNn0.fhvQm3IjizZ5QV_I-hi_ec-ywjlSIX3ctLcGdb_lu_U
-
-###
 
 GET http://localhost:3000/api/users HTTP/1.1
 Authorization: Bearer fdsfhdsfgdsgfdsf.eyJleHAiOjE1MjgxODE5MTYsImlhdCI6MTUyMjk5NzkxNn0.fhvQm3IjizZ5QV_I-hi_ec-ywjlSIX3ctLcGdb_lu_U
