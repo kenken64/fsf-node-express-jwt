@@ -51,7 +51,7 @@ router.put('/users', auth.required, function(req, res, next){
     })
 });
 
-router.post('/users/login', function(req, res, next){
+router.post('/login', function(req, res, next){
   console.log("login ...");
   if(!req.body.user.email){
     return res.status(422).json({errors: {email: "can't be blank"}});
@@ -68,7 +68,8 @@ router.post('/users/login', function(req, res, next){
     if(user){
       user.token = generateJWT(user.email);
       console.log("JWT token : > " + user.token);
-
+      delete user.hash;
+      delete user.salt;
       return res.json({user: user});
     } else {
       return res.status(422).json(info);
@@ -85,6 +86,7 @@ router.post('/users', function(req, res, next){
   console.log("saltValue > " + saltValue);
   //user.setPassword(req.body.user.password);
   let hashPassword = crypto.pbkdf2Sync(password, saltValue, 10000, 512, 'sha512').toString('hex');
+  // find user by email 
   DbConnection.instance.saveOneUser([username, email, null, hashPassword, saltValue, null ]).then(result=>{
     res.status(200).json(result);
   }).catch(error=> {

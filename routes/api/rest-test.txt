@@ -40,11 +40,11 @@ content-type: application/json
 ###
 
 GET http://localhost:3000/api/users HTTP/1.1
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7ImVtYWlsIjoiZW1haWwifSwiZXhwIjoxNTIzMTc5MTY4LCJpYXQiOjE1MjMxNzU1Njh9.v2is5v26WYC2dLkMyPlD_AQbaXK2N9nRCOINvBH8AME
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7ImVtYWlsIjoiZW1haWwifSwiZXhwIjoxNTUwNTUyMTI5LCJpYXQiOjE1NTA1NDg1Mjl9.FZ1KJuJYycaYFRL9aCdjRVJLIzZKdKEui-tR4CvO6is
 
 ###
 
-POST http://localhost:3000/api/users/login HTTP/1.1
+POST http://localhost:3000/api/login HTTP/1.1
 content-type: application/json
 
 {
@@ -56,7 +56,7 @@ content-type: application/json
 
 ###
 
-POST http://localhost:3000/api/users/login HTTP/1.1
+POST http://localhost:3000/api/login HTTP/1.1
 content-type: application/json
 
 {

@@ -19,9 +19,14 @@ passport.use(new LocalStrategy({
     }
     let passwordFromDB = userFromDB.hash;
     let hashPassword = crypto.pbkdf2Sync(password, userFromDB.salt, 10000, 512, 'sha512').toString('hex');
-    if(user == null  && passwordFromDB !== hashPassword){
+    console.log("passwordFromDB" + passwordFromDB);
+    console.log("hashPassword" + hashPassword);
+    if(user == null  || passwordFromDB !== hashPassword){
+      console.log("before invalid done ");
+      // TODO return error message when is invalid login.
       return done(null, false);
     }
+    console.log("before valid done ");
     return done(null, user);
   }).catch(done);
 }));
