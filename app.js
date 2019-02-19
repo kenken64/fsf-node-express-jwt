@@ -6,9 +6,9 @@ var express = require('express'),
  
 var isProduction = process.env.NODE_ENV === 'production';
 
+
 // Create global app object
 var app = express();
-
 app.use(cors());
 
 // Normal express config defaults
@@ -22,9 +22,9 @@ if (!isProduction) {
   app.use(errorhandler());
 }
 
-require('./config/passport');
 
 app.use(require('./routes'));
+require('./config/passport');
 
 /// catch 404 and forward to error handler
 app.use(function(req, res, next) {

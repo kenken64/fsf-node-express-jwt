@@ -1,7 +1,10 @@
 var router = require('express').Router();
 
-router.use('/', require('./users'));
-router.use('/payment', require('./payment'));
+module.exports = function(dbs) {
+  router.use('/', require('./users')(dbs));
+  outer.use('/payment', require('./payment'));
+}
+
 
 router.use(function(err, req, res, next){
   console.log(JSON.stringify(err));
