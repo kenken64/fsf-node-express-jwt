@@ -1,0 +1,1 @@
+mongodb+srv://admin:password1234@cluster0-ezubh.mongodb.net/test?retryWrites=true
