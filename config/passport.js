@@ -19,7 +19,7 @@ passport.use(new LocalStrategy({
     }
     let passwordFromDB = userFromDB.hash;
     let hashPassword = crypto.pbkdf2Sync(password, userFromDB.salt, 10000, 512, 'sha512').toString('hex');
-    if(user == null  && passwordFromDB !== hashPassword){
+    if(user == null  || passwordFromDB !== hashPassword){
       return done(null, false);
     }
     return done(null, user);
