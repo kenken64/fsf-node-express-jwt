@@ -1,11 +1,7 @@
 require('dotenv').config();
-var http = require('http'),
-    path = require('path'),
-    methods = require('methods'),
-    express = require('express'),
+var express = require('express'),
     bodyParser = require('body-parser'),
     cors = require('cors'),
-    passport = require('passport'),
     errorhandler = require('errorhandler');
  
 var isProduction = process.env.NODE_ENV === 'production';
@@ -21,9 +17,6 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 app.use(require('method-override')());
-//app.use(express.static(__dirname + '/public'));
-
-//app.use(session({ secret: 'ahdgsadhg', cookie: { maxAge: 60000 }, resave: false, saveUninitialized: false  }));
 
 if (!isProduction) {
   app.use(errorhandler());
