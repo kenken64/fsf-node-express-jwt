@@ -16,6 +16,10 @@ router.get('/users', auth.required, function(req, res, next){
   })
 });
 
+router.get('/unauthorized', function(req, res, next){
+  res.status(401 ).json("invalid login");
+});
+
 router.put('/users', auth.required, function(req, res, next){
     console.log(req.body);
     let user = {
@@ -72,7 +76,7 @@ router.post('/login', function(req, res, next){
       delete user.salt;
       return res.json({user: user});
     } else {
-      return res.status(422).json(info);
+      return res.status(401).json({errorMessage: "invalid username or password"});
     }
   })(req, res, next);
 });
