@@ -23,7 +23,6 @@ passport.use(new LocalStrategy({
     console.log("hashPassword" + hashPassword);
     if(user == null  || passwordFromDB !== hashPassword){
       console.log("before invalid done ");
-      // TODO return error message when is invalid login.
       return done(null, false);
     }
     console.log("before valid done ");
